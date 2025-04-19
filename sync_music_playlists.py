@@ -98,8 +98,10 @@ def load_mb_playlist(mb_playlist, mb_playlists=mb_playlists,
         file.close()
 
         for i, l in enumerate(mb):
-            mb[i] = l[len(mb_music_root_directory):-1]
-
+            if l[-1] == '\n':
+                mb[i] = l[len(mb_music_root_directory):-1]
+            else:
+                mb[i] = l[len(mb_music_root_directory):]
         # if mb_playlist[:4] != 'Top ':
         #     mb.sort()
 
