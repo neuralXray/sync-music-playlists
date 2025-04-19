@@ -1,8 +1,8 @@
-# Sync music playlists between Rhythmbox (pc) and Vanilla Music (mobile phone)
+# Sync music playlists between Rhythmbox (computer) and Phocid (mobile phone)
 
-Fully synchronize your music playlists between Rhythmbox, in your computer, and Vanilla Music, in your mobile phone.
+Fully synchronise your music playlists between Rhythmbox, on your computer, and Phocid (or Vanilla Music), on your mobile phone.
 
-0. Execute:
+0. Run the following commands:
 
 ```
 git clone https://github.com/neuralXray/sync-music-playlists.git
@@ -14,15 +14,29 @@ chmod u+x sync.sh
 touch sync.log
 ```
 
+Note: With Phocid synchronisation is fully bidirectional: changes made to playlists on the phone are reflected on the computer and vice versa. However, with Vanilla Music changes made on the computer are not automatically imported on the phone. Although Vanilla Music has a playlist `Full synchronization` option, it doesn't work reliably, playlist files are not automatically imported on startup. One can manually delete and reimport playlists, or use the `Force M3U reimport` option, but its behaviour is inconsistent: sometimes it works, sometimes it doesn't. For fully automated synchronisation (with no user intervention) [Phocid](https://f-droid.org/en/packages/org.sunsetware.phocid/) is strongly recommended.
+
+## Phocid
+
+1. In Phocid, in the `Playlists` tab, open the `three-dot menu` and select the `Playlists sync` option. There you can choose which playlists to sync, their target file names and the parent directory location where they are stored.
+
+2. Use Syncthing to synchronise `/home/<username>/.local/share/rhythmbox/` on your computer with the selected parent directory location of your Phocid playlists on your phone.
+
+
+## Vanilla Music
+
 1. In Vanilla Music: `Settings > Playlists > Playlists Synchronization`, select `Full synchronization`.
 
-2. Synchronize `/home/username/.local/share/rhythmbox/` in your computer with `storage/emulated/0/Android/media/ch.blinkenlights.android.vanilla/Playlists` in your phone with Syncthing.
+2. Use Syncthing to synchronise `/home/<username>/.local/share/rhythmbox/` on your computer with `storage/emulated/0/Android/media/ch.blinkenlights.android.vanilla/Playlists` on your phone.
 
-3. Modify `sync_music_playlists.py` script parameters following inplace instructions.
 
-4. Add `sync.sh` to Session and Startup > Application Autostart to trigger it on logging.
+## Computer
 
-Deployed in Linux Mint 21.3 with Python 3.10.12 (watchdog 4.0.1). For Rhythmbox 3.4.4 and Vanilla Music 1.3.2.
+3. Edit the `sync_music_playlists.py` script parameters following the inline instructions.
+
+4. Add `sync.sh` to `Session and Startup > Application Autostart` to trigger it on login.
+
+Deployed on Linux Mint 21.3 with Python 3.10.12 (watchdog 4.0.1), for Rhythmbox 3.4.4 and Phocid 20250409 (Vanilla Music 1.3.2).
 
 
 ## Support the developer
